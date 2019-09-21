@@ -1,9 +1,9 @@
 # Map_tools
 Tools used to handle PointCloud data
 
-[ ] NDT_Mapping
-[*] pcl_grid_divider
-[ ] pcd_filter 
+* NDT_Mapping[#TODO]
+* pcd_grid_divider
+* pcd_filter[#TODO] 
 
 
 ## PCD Grid Divider
