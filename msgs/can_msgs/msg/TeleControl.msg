@@ -1,0 +1,16 @@
+int8 gear
+int8 upGear
+int8 downGear
+int8 driveMode
+float32 realWheelAngle
+int8 signalLeft
+int8 signalRight
+int8 hazardLight
+int8 sideLight
+int8 headLight
+int8 beanLight
+int8 rearFogLamp
+int8 horns
+float32 modifyWheelAngle
+float32 speed
+int8 brake
