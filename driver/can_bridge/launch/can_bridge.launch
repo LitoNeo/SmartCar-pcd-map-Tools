@@ -1,8 +1,0 @@
-<launch>
-
-    <node pkg="can_module_usb2can" name="can_module_CANalyst_node" type="can_module_CANalyst_node" output="screen">
-        <param name="if_listen_can2" type="bool" value="false" />
-        <param name="CAN_device_num" type="int" value="2" />         <!--1:VCI_USBCAN1 2:VCI_USBCAN2  -->
-    </node>
-
-</launch>
