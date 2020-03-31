@@ -9,6 +9,10 @@
 # SmartCar-Tools
 Tools for self-driving car
 
+## 写在前面
+1. 每个单独的模块都有自己的使用说明,参考模块自身的`README.md`
+2. 关于环境配置问题,我正在制作Docker镜像
+
 ## How to Build
 This repo depends on QT-5.9 and ROS1.0, be sure it is correctly installed on your pc.
 I tested it on `Ubuntu1604`.
