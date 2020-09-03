@@ -17,7 +17,7 @@ function start(){
     scripts/roscore.sh start
 
     echo "Start rviz..."
-    scripts/rviz.sh start ${DIR}/map_tools/modules/trajectory_generator/rviz/rviz_config_traj_gene.rviz
+    scripts/rviz.sh start ${DIR}/../map_tools/modules/trajectory_generator/rviz/rviz_config_traj_gene.rviz
 
     echo "Start traj_generator..."
     nohup rosrun traj_generator traj_generator 2>&1 &
