@@ -11,6 +11,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# add_dependencies(traj_generator utils)
+
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
@@ -37,7 +39,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(PCL REQUIRED)
-find_package(utils REQUIRED)
+# find_package(utils REQUIRED)
 
 include_directories(include)
 catkin_package(
@@ -65,7 +67,7 @@ add_executable(traj_generator
   include/traj_extract.h
   src/traj_extract.cpp
 )
-
+add_dependencies(traj_generator utils)
 target_link_libraries(traj_generator PRIVATE Qt5::Widgets utils ${PCL_LIBRARIES} ${catkin_LIBRARIES})
 
 # ########安装脚本##########
