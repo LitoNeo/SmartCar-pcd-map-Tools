@@ -2,22 +2,21 @@
  # @Descripttion: 
  # @version: 
  # @Author: LitoNeo
- # @Date: 2020-01-13 12:44:11
- # @LastEditors  : LitoNeo
- # @LastEditTime : 2020-01-13 13:13:49
  ###
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BASE_DIR="cd "${SCRIPT_DIR}/.."; pwd"
+GRIDMAP_GENERATOR_DIR="cd "${BASE_DIR}/map_tools/grid_map_generator"; pwd"
+TRAJ_GENERATOR_DIR="cd "${BASE_DIR}/map_tools/trajectory_generator"; pwd"
 
-cd "${DIR}/.."
-
-source scripts/smartcar_base.sh
+source "${SCRIPT_DIR}/smartcar_base.sh"
 
 function start(){
     echo "Start roscore..."
-    scripts/roscore.sh start
+    ${SCRIPT_DIR}/roscore.sh start
+    sleep 1
 
     echo "Start rviz..."
-    scripts/rviz.sh start ${DIR}/../map_tools/modules/trajectory_generator/rviz/rviz_config_traj_gene.rviz
+    ${SCRIPT_DIR}/rviz.sh start
 
     echo "Start traj_generator..."
     nohup rosrun traj_generator traj_generator 2>&1 &
@@ -27,10 +26,10 @@ function stop(){
     pkill -SIGTERM -f traj_generator
     echo "traj_generator: stopped"
 
-    scripts/rviz.sh stop
+    ${SCRIPT_DIR}/rviz.sh stop
     echo "rviz: stopped"
 
-    scripts/roscore.sh stop
+    ${SCRIPT_DIR}/roscore.sh stop
     echo "roscore: stopped"
 }
 

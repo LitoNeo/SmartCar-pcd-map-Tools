@@ -6,15 +6,17 @@
  # @LastEditors  : LitoNeo
  # @LastEditTime : 2020-01-13 13:01:22
  ###
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-cd "${DIR}/.."
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"; pwd )"
+BASE_DIR="$( cd ${SCRIPT_DIR}/..; pwd )"
+TRAJ_GENERATOR_DIR="$(cd "${BASE_DIR}/map_tools/modules/trajectory_generator"; pwd)"
+RVIZ_CONFIG_FILE=${TRAJ_GENERATOR_DIR}/rviz/rviz_config_traj_gene.rviz
 
-source scripts/smartcar_base.sh
+
+# source scripts/smartcar_base.sh
 
 function start() {
     echo "Start rviz..."
-    RVIZ_CONFIG_FILE="$2"
     nohup rosrun rviz rviz -d "${RVIZ_CONFIG_FILE}" 2>&1 &
 }
 
