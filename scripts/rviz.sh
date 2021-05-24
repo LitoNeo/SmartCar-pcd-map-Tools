@@ -9,7 +9,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"; pwd )"
 BASE_DIR="$( cd ${SCRIPT_DIR}/..; pwd )"
-TRAJ_GENERATOR_DIR="$(cd "${BASE_DIR}/map_tools/modules/trajectory_generator"; pwd)"
+TRAJ_GENERATOR_DIR="$( cd "${BASE_DIR}/map_tools/modules/trajectory_generator"; pwd )"
 RVIZ_CONFIG_FILE=${TRAJ_GENERATOR_DIR}/rviz/rviz_config_traj_gene.rviz
 
 

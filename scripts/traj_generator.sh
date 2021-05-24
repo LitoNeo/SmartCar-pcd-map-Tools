@@ -3,12 +3,23 @@
  # @version: 
  # @Author: LitoNeo
  ###
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BASE_DIR="cd "${SCRIPT_DIR}/.."; pwd"
-GRIDMAP_GENERATOR_DIR="cd "${BASE_DIR}/map_tools/grid_map_generator"; pwd"
-TRAJ_GENERATOR_DIR="cd "${BASE_DIR}/map_tools/trajectory_generator"; pwd"
+# set -x
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"; pwd )"
+BASE_DIR="$( cd ${SCRIPT_DIR}/..; pwd )"
+GRIDMAP_GENERATOR_DIR="$( cd "${BASE_DIR}/map_tools/modules/grid_map_generator"; pwd )"
+TRAJ_GENERATOR_DIR="$( cd "${BASE_DIR}/map_tools/modules/trajectory_generator"; pwd )"
 
 source "${SCRIPT_DIR}/smartcar_base.sh"
+
+CATKIN_DIR="$( cd ${BASE_DIR}/../..; pwd )"
+ENV_BASH_FILE="${CATKIN_DIR}/devel/setup.bash"
+if [ ! -f ${ENV_BASH_FILE} ];then
+    echo "${ENV_BASH_FILE} not found."
+    echo "Please build this project first"
+    exit 1
+fi
+source ${ENV_BASH_FILE}
 
 function start(){
     echo "Start roscore..."
@@ -41,6 +52,6 @@ case $1 in
     stop
     ;;
   *)
-    echo "choose start or stop"
+    echo "choose start or stop argument"
     ;;
 esac
