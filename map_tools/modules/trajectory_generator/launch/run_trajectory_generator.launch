@@ -1,0 +1,7 @@
+<launch>
+    <node name="traj_generator" pkg="traj_generator" type="traj_generator" output="screen" />
+
+    <node pkg="rviz" type="rviz" name="rviz" output="screen" 
+      args="-d $(find traj_generator)/rviz/rviz_config_traj_gene.rviz" required="true">
+    </node>
+</launch>

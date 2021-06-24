@@ -7,6 +7,8 @@
 #include <vector>
 #include <algorithm>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Pose.h>
 #include <nav_msgs/Path.h>
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
@@ -66,6 +68,8 @@ private:
     void init_ros();
 
     bool load_map();
+
+    bool adjust_orientation();
 
     bool pose_cb(const geometry_msgs::PoseWithCovarianceStampedConstPtr &msg);
 

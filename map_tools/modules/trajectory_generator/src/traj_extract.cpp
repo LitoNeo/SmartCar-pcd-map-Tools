@@ -38,6 +38,34 @@ bool smartcar::tools::Traj_Extractor::set_folder(const std::string &input_folder
         _output_folder += "/";
 }
 
+bool smartcar::tools::Traj_Extractor::adjust_orientation(){
+    int size = current_path.poses.size();
+    if (size < 2){
+        return false;
+    }
+    // 调整每个轨迹点的角度
+    for (size_t i = 0; i < size - 1; i++)
+    {
+        geometry_msgs::PoseStamped p_c = current_path.poses[i];
+        geometry_msgs::PoseStamped p_n = current_path.poses[i + 1];
+        double yaw = std::atan2(p_n.pose.position.y - p_c.pose.position.y, p_n.pose.position.x - p_c.pose.position.x);
+        Eigen::AngleAxisd rollangle(0, Eigen::Vector3d::UnitX());
+        Eigen::AngleAxisd yawangle(yaw, Eigen::Vector3d::UnitZ());
+        Eigen::AngleAxisd pitchangle(0, Eigen::Vector3d::UnitY());
+        Eigen::Quaterniond q = rollangle * yawangle * pitchangle;
+        current_path.poses[i].pose.orientation.x = q.x();
+        current_path.poses[i].pose.orientation.y = q.y();
+        current_path.poses[i].pose.orientation.z = q.z();
+        current_path.poses[i].pose.orientation.w = q.w();
+    }
+    current_path.poses[size-1].pose.orientation.x = current_path.poses[size-2].pose.orientation.x;
+    current_path.poses[size-1].pose.orientation.y = current_path.poses[size-2].pose.orientation.x;
+    current_path.poses[size-1].pose.orientation.z = current_path.poses[size-2].pose.orientation.x;
+    current_path.poses[size-1].pose.orientation.w = current_path.poses[size-2].pose.orientation.x;
+
+    return true;
+}
+
 bool smartcar::tools::Traj_Extractor::create_trajtory(traj_info &traj_info)
 {
     return on_create_trajectory(traj_info);
@@ -120,6 +148,7 @@ bool smartcar::tools::Traj_Extractor::pose_cb(
     origin_path = current_path;
 
     smooth_path(_weight_data, _weight_smooth, _tolerance);
+    adjust_orientation();
     pub_path.publish(current_path);
     return true;
 }
